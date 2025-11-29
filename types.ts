@@ -13,6 +13,7 @@ export enum BuildingType {
   CoupaCafe = 'CoupaCafe',
   TraderJoes = 'TraderJoes', // New
   DSchool = 'DSchool', // New
+  LiKaShing = 'LiKaShing', // Li Ka Shing Center
   StudentDorm = 'StudentDorm',
   LectureHall = 'LectureHall',
   VapeStore = 'VapeStore',
@@ -45,7 +46,7 @@ export type GameMode = 'pomodoro' | 'standard' | 'creative';
 
 export type SchoolType = 'Engineering' | 'Medicine' | 'Business' | 'Law' | 'Humanities' | 'Sustainability' | 'Education';
 
-export type StatCategory = 'Innovation' | 'Research' | 'Prestige' | 'Culture' | 'Nature' | 'Wellbeing';
+export type StatCategory = 'Academic' | 'Entrepreneurial' | 'Donor' | 'AI' | 'Culture' | 'Equity' | 'Execution' | 'Wellbeing';
 
 export interface BuildingConfig {
   type: BuildingType;
@@ -58,6 +59,8 @@ export interface BuildingConfig {
   unlockDay: number; // Day the building becomes available (0 = start)
   school?: SchoolType; // Associated school
   statBonuses?: Partial<Record<StatCategory, number>>; // Bonus to specific stats
+  interactionOffset?: { x: number, z: number }; // Offset from center for students to stand
+  interactionRadius?: number; // Random radius around offset
 }
 
 export interface TileData {
@@ -81,7 +84,7 @@ export interface CityStats {
   gameWon: boolean;
   gameLost: boolean;
   campaignActive: boolean;
-  
+
   // Advanced Stats (0-100 scale)
   metrics: Record<StatCategory, number>;
   schools: Record<SchoolType, number>;
@@ -120,6 +123,8 @@ export interface AlumniEvent {
     outfit: 'suit' | 'casual' | 'leather_jacket' | 'sporty';
     accessory?: 'glasses' | 'none';
   };
+  tier?: 1 | 2 | 3; // Event tier for donation system
+  donationAmount?: number; // Potential donation amount
 }
 
 export interface TeaMessage {
@@ -128,4 +133,32 @@ export interface TeaMessage {
   sender: string; // e.g., "Grad Student", "Freshman", "System"
   timestamp: number; // Game Day
   type: 'gossip' | 'event' | 'quote';
+}
+
+export interface CEOVisitor {
+  id: string;
+  event: AlumniEvent;
+  x: number;
+  y: number;
+  targetX: number;
+  targetY: number;
+  state: 'walking' | 'visiting_building' | 'chatting' | 'leaving';
+  timer: number;
+  visitedBuildings: BuildingType[];
+  chatsCompleted: number;
+  photosGenerated: number;
+}
+
+export interface LegacyEnergy {
+  amount: number; // 0-100
+  source: string; // CEO name
+  unlocks: string[]; // Research breakthroughs
+}
+
+export interface ChatboardMessage {
+  id: string;
+  ceoName: string;
+  message: string;
+  timestamp: number; // Game day
+  category: 'inspiration' | 'advice' | 'challenge';
 }
