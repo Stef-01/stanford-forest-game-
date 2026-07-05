@@ -66,3 +66,23 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 ---
 
 **These guidelines are working if:** fewer unnecessary changes in diffs, fewer rewrites due to overcomplication, and clarifying questions come before implementation rather than after mistakes.
+
+
+---
+
+## ⚡ DISPATCH PROTOCOL ⚡
+
+If `DISPATCH.md` exists in the repo root with `state: open`:
+1. **Read it FIRST**, before any other work, unless Stefan's prompt explicitly
+   overrides it. If Stefan gave a different task, do Stefan's task, then note
+   in STATUS.md that the dispatch was preempted (outcome stays as-is).
+2. On starting dispatch work: overwrite `STATUS.md` with the matching
+   `dispatch_id` and `outcome: in-progress`. Commit.
+3. Execute against the acceptance criteria. Challenge bad assumptions —
+   `outcome: rejected` with reasoning beats silently building the wrong thing.
+4. On finish: finalize STATUS.md (outcome, commits, verification evidence,
+   suggested_next). `shipped` requires lint+tests+build passing — otherwise
+   it is `partial`. Commit and push everything to main.
+5. Never edit DISPATCH.md. Cowork owns it. Never delete STATUS.md history —
+   prior cycles are archived by the sync task, not by you.
+6. Log the session to Stefan-Brain wiki/_log/ as always.
