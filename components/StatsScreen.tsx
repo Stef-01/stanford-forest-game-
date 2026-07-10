@@ -190,8 +190,8 @@ const OKRSection = ({ stats }: { stats: CityStats }) => {
                     kr: "Climate Action",
                     finalTarget: 100,
                     unit: "",
-                    current: stats.metrics.Climate,
-                    prevActual: Math.floor(stats.metrics.Climate * 0.85)
+                    current: stats.metrics.Wellbeing,
+                    prevActual: Math.floor(stats.metrics.Wellbeing * 0.85)
                 }
             ]
         },
@@ -328,7 +328,7 @@ const OKRSection = ({ stats }: { stats: CityStats }) => {
 const StatsScreen: React.FC<StatsScreenProps> = ({ stats, completedGoals, onClose }) => {
     const [activeTab, setActiveTab] = useState<'overview' | 'okr'>('overview');
 
-    const statLabels: StatCategory[] = ['Academic', 'Entrepreneurial', 'Donor', 'Climate', 'AI', 'Culture', 'Equity', 'Execution'];
+    const statLabels: StatCategory[] = ['Academic', 'Entrepreneurial', 'Donor', 'Wellbeing', 'AI', 'Culture', 'Equity', 'Execution'];
     const statData = statLabels.map(l => stats.metrics[l]);
 
     const schoolLabels: SchoolType[] = ['Engineering', 'Medicine', 'Business', 'Law', 'Humanities', 'Sustainability', 'Education'];
